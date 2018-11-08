@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<style>
+table, th, td {
+	border: 1px solid grey;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+table tr:nth-child(odd) {
+	background-color: #f1f1f1;
+}
+
+table tr:nth-child(even) {
+	background-color: #ffffff;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://restcountries.eu/rest/v2/all"></script>
+<head>
+<meta charset="ISO-8859-1">
+<title>Paises</title>
+</head>
+<body>
+	<dive ng-app="AppPaises" ng-controller="ControllerApp">
+	<p>Lista de paises</p>
+	<p>
+		<input type="text" ng-model="test">
+	</p>
+	<select>
+		<option ng-repeat="pais in paises">{{pais.name}}</option>
+	</select>
+	<table>
+		<tr>
+			<th ng-click = "ordernadoPorMi('name')">Pais</th>
+			<th ng-click = "ordernadoPorMi('capital')">Capital</th>
+		</tr>
+		<tr ng-repeat="pais in paises | orderBy:ordenado">
+			<td>{{pais.name}}</td>
+			<td>{{pais.capital}}</td>
+		</tr>
+	</table>
+	</dive>
+
+	<script>
+		var app = angular.module('AppPaises', []);
+		app.controller('ControllerApp', function($scope, $http, $log) {
+			$http.get("https://restcountries.eu/rest/v2/all").then(
+					function(response) {
+						$scope.paises = response.data;
+						$log.info(response);
+						$scope.ordernadoPorMi = function(ordenSeleccionado) {
+						$scope.ordenado = ordenSeleccionado;
+					    }
+					});
+		});
+	</script>
+</body>
+</html>
