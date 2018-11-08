@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<head>
+<meta charset="ISO-8859-1">
+<title>is this coockie clicker?</title>
+</head>
+<body>
+	<div ng-app= "miApp" ng-controller = "miControlador">
+		<h1 ng-click = "incrementar()">{{contadorDeClicks}}</h1>
+	</div>
+	
+<script>
+var app = angular.module('miApp',[]);
+app.controller('miControlador', function($scope){
+	$scope.contadorDeClicks = 0;
+	$scope.incrementar = function (){
+		$scope.contadorDeClicks++;
+	}
+})
+</script>
+</body>
+</html>

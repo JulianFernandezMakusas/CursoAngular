@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ejemplo 4</title>
+</head>
+<body>
+	<div ng-app="miApp" ng-controller="miControlador">
+		<p>Buscar nombres que contengan</p>
+		<p>
+			<input type="text" ng-model="test">
+		</p>
+
+		<ul>
+			<li ng-repeat="nombre in nombres | filter:test">{{nombre}}</li>
+		</ul>
+
+	</div>
+	<script>
+		angular.module('miApp', []).controller(
+				'miControlador',
+				function($scope) {
+					$scope.nombres = [ 'Juan', 'Julian', 'Carlos', 'Sebastian',
+							'Maria', 'Cristobal' ]
+				})
+	</script>
+</body>
+</html>
